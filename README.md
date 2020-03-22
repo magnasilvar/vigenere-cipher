@@ -18,7 +18,8 @@ At the root level of the project :
 > Powershell example:
 ```powershell
 PS C:\GIT\vigenere-cipher> mvn clean install -U
-PS C:\GIT\vigenere-cipher> java -jar .\target\vigenere-cipher-1.0-SNAPSHOT.jar "Icatwhe ms dlc Hgvvvème vmzlcd !" MyPrivateKey                                                                                            key=MYPRIVATEKEY
+PS C:\GIT\vigenere-cipher> java -jar .\target\vigenere-cipher-1.0-SNAPSHOT.jar "Icatwhe ms dlc Hgvvvème vmzlcd !" MyPrivateKey
+key=MYPRIVATEKEY
 alphabet=ABCDEFGHIJKLMNOPQRSTUVWXYZ
 Decrypted sequence: Welcome to the Vigenère cipher !
 ```
