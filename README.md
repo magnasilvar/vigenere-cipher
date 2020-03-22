@@ -1,27 +1,24 @@
 # vigenere-cipher
 
-Java implementation of the **Vigenère cipher** (decryption part) as part of the "_hack mon annonce_" event organized by [Parrot](https://github.com/Parrot-Developers) in **2015**.
+Java implementation of the **Vigenère cipher** (decryption part).
 
 ## Setup
 
-* Java: `Oracle JDK 1.8`
+* Java >= `OpenJDK 11`
 
 ## How to
 
 At the root level of the project :
-* Compile Vigenere java class with the `javac` command.
-* Run the compiled class with the `java` command and the following arguments (respecting this order):
-  1. Decryption key (Hexadecimal format needed ! It was the key's format provided during the event),
-  2. Alphabet to use,
-  3. Encrypted words (with Vigenère cipher).
+* Compile project with `maven`.
+* Run the compiled JAR with the `java` command and the following arguments (respecting this order):
+  1. Encrypted sequence (with Vigenère cipher),
+  2. Decryption key (Case insensitive),
+  3. Alphabet to use (Optional / Case insensitive).
 
 > Powershell example:
 ```powershell
-PS C:\GIT\vigenere-cipher> javac .\Vigenere.java
-PS C:\vigenere-cipher> java Vigenere 434c45 ABCDEFGHIJKLMNOPQRSTUVWXYZ JPPNZ
-Clé: CLE
-Alphabet: ABCDEFGHIJKLMNOPQRSTUVWXYZ
-Message clair: HELLO
+PS C:\GIT\vigenere-cipher> mvn clean install -U
+PS C:\GIT\vigenere-cipher> java -jar .\target\vigenere-cipher-1.0-SNAPSHOT.jar "Icatwhe ms dlc Hgvvvème vmzlcd !" MyPrivateKey                                                                                            key=MYPRIVATEKEY
+alphabet=ABCDEFGHIJKLMNOPQRSTUVWXYZ
+Decrypted sequence: Welcome to the Vigenère cipher !
 ```
-
-> CAUTION - Use the same case for your 3 arguments !
