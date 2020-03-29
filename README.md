@@ -22,7 +22,7 @@ PS C:\GIT\vigenere-cipher> mvn clean package -U
 
 ### Encrypt (with default alphabet)
 ```powershell
-PS C:\GIT\vigenere-cipher> java -jar .\target\vigenere-cipher-1.0-SNAPSHOT.jar encrypt "Welcome to the Vigenère cipher !" MyPrivateKey
+PS C:\GIT\vigenere-cipher> java -jar .\target\vigenere-cipher-1.0.0.jar encrypt "Welcome to the Vigenère cipher !" MyPrivateKey
 key=MYPRIVATEKEY
 alphabet=ABCDEFGHIJKLMNOPQRSTUVWXYZ
 Cipher text: Icatwhe ms dlc Hgvvvème vmzlcd !
@@ -30,7 +30,7 @@ Cipher text: Icatwhe ms dlc Hgvvvème vmzlcd !
 
 ### Decrypt (with default alphabet)
 ```powershell
-PS C:\GIT\vigenere-cipher> java -jar .\target\vigenere-cipher-1.0-SNAPSHOT.jar decrypt "Icatwhe ms dlc Hgvvvème vmzlcd !" MyPrivateKey
+PS C:\GIT\vigenere-cipher> java -jar .\target\vigenere-cipher-1.0.0.jar decrypt "Icatwhe ms dlc Hgvvvème vmzlcd !" MyPrivateKey
 key=MYPRIVATEKEY
 alphabet=ABCDEFGHIJKLMNOPQRSTUVWXYZ
 Plain text: Welcome to the Vigenère cipher !
@@ -38,7 +38,7 @@ Plain text: Welcome to the Vigenère cipher !
 
 ### Encrypt (with custom alphabet)
 ```powershell
-PS C:\GIT\vigenere-cipher> java -jar .\target\vigenere-cipher-1.0-SNAPSHOT.jar encrypt "Hello !" key ehkloy
+PS C:\GIT\vigenere-cipher> java -jar .\target\vigenere-cipher-1.0.0.jar encrypt "Hello !" key ehkloy
 key=KEY
 alphabet=EHKLOY
 Cipher text: Lekyo !
@@ -46,7 +46,7 @@ Cipher text: Lekyo !
 
 ### Decrypt (with custom alphabet)
 ```powershell
-PS C:\GIT\vigenere-cipher> java -jar .\target\vigenere-cipher-1.0-SNAPSHOT.jar decrypt "Lekyo !" key ehkloy
+PS C:\GIT\vigenere-cipher> java -jar .\target\vigenere-cipher-1.0.0.jar decrypt "Lekyo !" key ehkloy
 key=KEY
 alphabet=EHKLOY
 Plain text: Hello !
