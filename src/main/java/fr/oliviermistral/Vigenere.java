@@ -6,7 +6,11 @@ import java.util.List;
  * Classe permettant de déchiffrer un message codé par le chiffrement de
  * Vigenère
  */
-public class Vigenere {
+public final class Vigenere {
+
+    private Vigenere() {
+        // All methods are static
+    }
 
     public static void main(final String[] args) {
         if (!List.of(3, 4).contains(args.length)) {
