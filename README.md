@@ -1,6 +1,7 @@
 
-[![GitHub Release](https://img.shields.io/github/release/magnasilvar/vigenere-cipher.svg)](https://github.com/magnasilvar/vigenere-cipher/releases) 
-[![Follow @oliviermistral](https://img.shields.io/twitter/follow/oliviermistral.svg?style=social)](https://twitter.com/intent/follow?screen_name=oliviermistral) 
+[![GitHub Release](https://img.shields.io/github/release/magnasilvar/vigenere-cipher.svg)](https://github.com/magnasilvar/vigenere-cipher/releases)
+![.github/workflows/maven.yml](https://github.com/magnasilvar/vigenere-cipher/workflows/.github/workflows/maven.yml/badge.svg)
+[![Follow @oliviermistral](https://img.shields.io/twitter/follow/oliviermistral.svg?style=social)](https://twitter.com/intent/follow?screen_name=oliviermistral)
 
 # vigenere-cipher
 
