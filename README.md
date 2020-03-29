@@ -1,6 +1,7 @@
 
 [![GitHub Release](https://img.shields.io/github/release/magnasilvar/vigenere-cipher.svg)](https://github.com/magnasilvar/vigenere-cipher/releases)
 ![Java CI with Maven](https://github.com/magnasilvar/vigenere-cipher/workflows/Java%20CI%20with%20Maven/badge.svg)
+[![codecov](https://codecov.io/gh/magnasilvar/vigenere-cipher/branch/master/graph/badge.svg)](https://codecov.io/gh/magnasilvar/vigenere-cipher)
 [![Follow @oliviermistral](https://img.shields.io/twitter/follow/oliviermistral.svg?style=social)](https://twitter.com/intent/follow?screen_name=oliviermistral)
 
 # vigenere-cipher
