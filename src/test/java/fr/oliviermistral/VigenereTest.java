@@ -22,7 +22,9 @@ public class VigenereTest {
             try (final PrintStream newOut = new PrintStream(output); Scanner fileReader = new Scanner(output)) {
                 System.setOut(newOut);
                 Vigenere.main(new String[0]);
-                Assertions.assertEquals("Bad use ! Syntax : \"encrypted sequence\" \"key\" \"alphabet (optional)\"", fileReader.nextLine());
+                Assertions.assertEquals(
+                        "Bad use ! Syntax : \"encrypt|decrypt\" \"Text to encrypt / decrypt\" \"key\" \"(optional) alphabet\"",
+                        fileReader.nextLine());
                 Assertions.assertFalse(fileReader.hasNext());
                 System.setOut(originalOut);
             }
@@ -36,10 +38,11 @@ public class VigenereTest {
             output.createNewFile();
             try (final PrintStream newOut = new PrintStream(output); Scanner fileReader = new Scanner(output)) {
                 System.setOut(newOut);
-                Vigenere.main(new String[] { "Icatwhe ms dlc Hgvvvème vmzlcd !", "MyPrivateKey" });
+                Vigenere.main(new String[] { CipherDirection.DECRYPT.getDirection(), "Icatwhe ms dlc Hgvvvème vmzlcd !",
+                        "MyPrivateKey" });
                 Assertions.assertEquals("key=MYPRIVATEKEY", fileReader.nextLine());
                 Assertions.assertEquals("alphabet=ABCDEFGHIJKLMNOPQRSTUVWXYZ", fileReader.nextLine());
-                Assertions.assertEquals("Decrypted sequence: Welcome to the Vigenère cipher !", fileReader.nextLine());
+                Assertions.assertEquals("Plain text: Welcome to the Vigenère cipher !", fileReader.nextLine());
                 Assertions.assertFalse(fileReader.hasNext());
                 System.setOut(originalOut);
             }
@@ -53,10 +56,11 @@ public class VigenereTest {
             output.createNewFile();
             try (final PrintStream newOut = new PrintStream(output); Scanner fileReader = new Scanner(output)) {
                 System.setOut(newOut);
-                Vigenere.main(new String[] { "Wdjtopp lo tdi Hpednèly vyjham !", "MyPrivateKey", "AbCdEfGhIjKlprtvym" });
+                Vigenere.main(new String[] { CipherDirection.DECRYPT.getDirection(), "Wdjtopp lo tdi Hpednèly vyjham !",
+                        "MyPrivateKey", "AbCdEfGhIjKlprtvym" });
                 Assertions.assertEquals("key=MYPRIVATEKEY", fileReader.nextLine());
                 Assertions.assertEquals("alphabet=ABCDEFGHIJKLPRTVYM", fileReader.nextLine());
-                Assertions.assertEquals("Decrypted sequence: Welcome to the Vigenère cipher !", fileReader.nextLine());
+                Assertions.assertEquals("Plain text: Welcome to the Vigenère cipher !", fileReader.nextLine());
                 Assertions.assertFalse(fileReader.hasNext());
                 System.setOut(originalOut);
             }
@@ -70,10 +74,14 @@ public class VigenereTest {
             output.createNewFile();
             try (final PrintStream newErr = new PrintStream(output); Scanner fileReader = new Scanner(output)) {
                 System.setErr(newErr);
-                Vigenere.main(new String[] { "", "MyPrivateKey", "Abcdac" });
-                Assertions.assertEquals("Settings errors:", fileReader.nextLine());
+                Vigenere.main(new String[] { "unknown", "", "MyPrivateKey", "Abcdac" });
+                Assertions.assertEquals("Errors:", fileReader.nextLine());
+                Assertions.assertEquals("- Invalid argument 'unknown', valid arguments are: [encrypt, decrypt]",
+                        fileReader.nextLine());
                 Assertions.assertEquals("- Alphabet contains non unique characters: [A, C]", fileReader.nextLine());
-                Assertions.assertEquals("- Key contains forbidden characters (not included in the alphabet): [P, R, T, E, V, Y, I, K, M]", fileReader.nextLine());
+                Assertions.assertEquals(
+                        "- Key contains forbidden characters (not included in the alphabet): [P, R, T, E, V, Y, I, K, M]",
+                        fileReader.nextLine());
                 Assertions.assertFalse(fileReader.hasNext());
                 System.setOut(originalErr);
             }

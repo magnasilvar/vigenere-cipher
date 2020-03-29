@@ -10,6 +10,7 @@ public class VigenereData {
 
     protected static final String DEFAULT_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
+    private final CipherDirection cipherDirection;
     private final int keyLength;
     private final String key;
     private final int alphabetLength;
@@ -17,16 +18,22 @@ public class VigenereData {
     private final char[] chars;
     private final List<String> errors = new ArrayList<>();
 
-    public VigenereData(final String alphabet, final String key, final char[] chars) throws VigenereSettingsException {
+    public VigenereData(final String direction, final String alphabet, final String key, final char[] chars)
+            throws VigenereSettingsException {
+        this.cipherDirection = manageCipherDirection(direction);
         this.alphabet = manageAlphabet(alphabet);
         this.alphabetLength = this.alphabet.length();
         this.key = manageKey(key);
         this.keyLength = this.key.length();
         this.chars = chars;
-    
+
         if (!errors.isEmpty()) {
             throw new VigenereSettingsException(errors);
         }
+    }
+
+    public CipherDirection getCipherDirection() {
+        return cipherDirection;
     }
 
     public int getKeyLength() {
@@ -49,13 +56,24 @@ public class VigenereData {
         return chars;
     }
 
+    private CipherDirection manageCipherDirection(final String value) {
+        final CipherDirection direction = CipherDirection.from(value);
+        if (direction == null) {
+            errors.add(new StringBuilder().append("Invalid argument '").append(value)
+                    .append("', valid arguments are: [").append(CipherDirection.ENCRYPT.getDirection()).append(", ")
+                    .append(CipherDirection.DECRYPT.getDirection()).append("]").toString());
+        }
+        return direction;
+    }
+
     private String manageAlphabet(final String alphabet) {
         if (alphabet == null) {
             return DEFAULT_ALPHABET;
         }
-        final List<Character> alphabetChars = alphabet.toUpperCase().chars().mapToObj(c -> (char) c).collect(Collectors.toList());
-        final Set<Character> duplicates =
-            alphabetChars.stream().filter(ac -> Collections.frequency(alphabetChars, ac) > 1).collect(Collectors.toSet());
+        final List<Character> alphabetChars = alphabet.toUpperCase().chars().mapToObj(c -> (char) c)
+                .collect(Collectors.toList());
+        final Set<Character> duplicates = alphabetChars.stream()
+                .filter(ac -> Collections.frequency(alphabetChars, ac) > 1).collect(Collectors.toSet());
         if (!duplicates.isEmpty()) {
             errors.add("Alphabet contains non unique characters: " + duplicates);
         }
@@ -65,7 +83,7 @@ public class VigenereData {
     private String manageKey(final String key) {
         final String upperKey = key.toUpperCase();
         final Set<Character> forbiddeChars = upperKey.chars().mapToObj(c -> (char) c)
-            .filter(c -> !alphabet.contains(String.valueOf(c))).collect(Collectors.toSet());
+                .filter(c -> !alphabet.contains(String.valueOf(c))).collect(Collectors.toSet());
         if (!forbiddeChars.isEmpty()) {
             errors.add("Key contains forbidden characters (not included in the alphabet): " + forbiddeChars);
         }
