@@ -1,6 +1,6 @@
 # vigenere-cipher
 
-Java implementation of the **Vigenère cipher** (decryption part).
+Java implementation of the **Vigenère cipher**.
 
 ## Setup
 
@@ -8,18 +8,46 @@ Java implementation of the **Vigenère cipher** (decryption part).
 
 ## How to
 
-At the root level of the project :
-* Compile project with `maven`.
-* Run the compiled JAR with the `java` command and the following arguments (respecting this order):
-  1. Encrypted sequence (with Vigenère cipher),
-  2. Decryption key (Case insensitive),
-  3. Alphabet to use (Optional / Case insensitive).
-
-> Powershell example:
+Clone or download the _vigenere-cipher_ project :
+* Package it with `maven`.
 ```powershell
-PS C:\GIT\vigenere-cipher> mvn clean install -U
-PS C:\GIT\vigenere-cipher> java -jar .\target\vigenere-cipher-1.0-SNAPSHOT.jar "Icatwhe ms dlc Hgvvvème vmzlcd !" MyPrivateKey
+PS C:\GIT\vigenere-cipher> mvn clean package -U
+```
+* Run the compiled JAR with the `java` command and the following ordered arguments:
+  1. encrypt|decrypt (depending on whether you want to encrypt or decrypt your text)
+  2. Text to encrypt / decrypt (with the **Vigenère cipher**),
+  3. Decryption key (case insensitive),
+  4. Alphabet to use (optional / case insensitive) / default alphabet: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ').
+  > Following examples are executed with `Powershell`.
+
+### Encrypt (with default alphabet)
+```powershell
+PS C:\GIT\vigenere-cipher> java -jar .\target\vigenere-cipher-1.0-SNAPSHOT.jar encrypt "Welcome to the Vigenère cipher !" MyPrivateKey
 key=MYPRIVATEKEY
 alphabet=ABCDEFGHIJKLMNOPQRSTUVWXYZ
-Decrypted sequence: Welcome to the Vigenère cipher !
+Cipher text: Icatwhe ms dlc Hgvvvème vmzlcd !
+```
+
+### Decrypt (with default alphabet)
+```powershell
+PS C:\GIT\vigenere-cipher> java -jar .\target\vigenere-cipher-1.0-SNAPSHOT.jar decrypt "Icatwhe ms dlc Hgvvvème vmzlcd !" MyPrivateKey
+key=MYPRIVATEKEY
+alphabet=ABCDEFGHIJKLMNOPQRSTUVWXYZ
+Plain text: Welcome to the Vigenère cipher !
+```
+
+### Encrypt (with custom alphabet)
+```powershell
+PS C:\GIT\vigenere-cipher> java -jar .\target\vigenere-cipher-1.0-SNAPSHOT.jar encrypt "Hello !" key ehkloy
+key=KEY
+alphabet=EHKLOY
+Cipher text: Lekyo !
+```
+
+### Decrypt (with custom alphabet)
+```powershell
+PS C:\GIT\vigenere-cipher> java -jar .\target\vigenere-cipher-1.0-SNAPSHOT.jar decrypt "Lekyo !" key ehkloy
+key=KEY
+alphabet=EHKLOY
+Plain text: Hello !
 ```
