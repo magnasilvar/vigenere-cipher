@@ -16,10 +16,6 @@
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
     <junit.jupiter.version>5.6.1</junit.jupiter.version>
-    <sonar.projectKey>magnasilvar_vigenere-cipher</sonar.projectKey>
-    <sonar.organization>magnasilvar</sonar.organization>
-    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-    <sonar.login>848e9c88d8f385f4ac5ed1cbd9de5c1787f71e09</sonar.login>
   </properties>
 
   <dependencies>
