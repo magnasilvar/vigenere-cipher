@@ -8,7 +8,8 @@ B|C|C                  For the others, don't say we didn't warn you! ¯\_(ツ)_/
 
 [![GitHub Release](https://img.shields.io/github/release/magnasilvar/vigenere-cipher.svg)](https://github.com/magnasilvar/vigenere-cipher/releases)
 ![Java CI with Maven](https://github.com/magnasilvar/vigenere-cipher/workflows/Java%20CI%20with%20Maven/badge.svg)
-[![codecov](https://codecov.io/gh/magnasilvar/vigenere-cipher/branch/master/graph/badge.svg)](https://codecov.io/gh/magnasilvar/vigenere-cipher)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=magnasilvar_vigenere-cipher&metric=alert_status)](https://sonarcloud.io/dashboard?id=magnasilvar_vigenere-cipher)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=magnasilvar_vigenere-cipher&metric=coverage)](https://sonarcloud.io/dashboard?id=magnasilvar_vigenere-cipher)
 [![Known Vulnerabilities](https://snyk.io/test/github/magnasilvar/vigenere-cipher/badge.svg?targetFile=pom.xml)](https://snyk.io/test/github/magnasilvar/vigenere-cipher?targetFile=pom.xml)
 [![Follow @oliviermistral](https://img.shields.io/twitter/follow/oliviermistral.svg?style=social)](https://twitter.com/intent/follow?screen_name=oliviermistral)
 
