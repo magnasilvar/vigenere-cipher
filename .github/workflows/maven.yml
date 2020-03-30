@@ -21,4 +21,4 @@ jobs:
       with:
         java-version: 11
     - name: Build with Maven + SonarSource
-      run: mvn -B package --file pom.xml sonar:source
+      run: mvn -B package --file pom.xml sonar:sonar
