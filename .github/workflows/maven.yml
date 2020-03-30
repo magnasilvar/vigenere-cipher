@@ -24,3 +24,5 @@ jobs:
       run: mvn -B package --file pom.xml
     - name: SonarCloud Scan
       uses: sonarsource/sonarcloud-github-action@master
+      env:
+        SONAR_TOKEN: 848e9c88d8f385f4ac5ed1cbd9de5c1787f71e09
