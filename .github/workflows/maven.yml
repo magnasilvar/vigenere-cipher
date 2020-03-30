@@ -20,5 +20,7 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 11
-    - name: Build with Maven + SonarSource
-      run: mvn -B package --file pom.xml sonar:sonar
+    - name: Build with Maven
+      run: mvn -B package --file pom.xml
+    - name: SonarCloud Scan
+      uses: sonarsource/sonarcloud-github-action@master
