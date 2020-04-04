@@ -80,7 +80,7 @@
       </plugins>
     </pluginManagement>
     <plugins>
-      <!-- jacoco generated report is used by codecov.io -->
+      <!-- jacoco generated report is used by sonarcloud -->
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
