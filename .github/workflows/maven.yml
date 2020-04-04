@@ -21,6 +21,6 @@ jobs:
       with:
         java-version: 11
     - name: Build with Maven + SonarSource
-      run: mvn -B package --file pom.xml sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=magnasilvar_vigenere-cipher -Dsonar.organization=magnasilvar
+      run: mvn -B package --file pom.xml sonar:sonar -Dsonar.scm.provider=git -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=magnasilvar_vigenere-cipher -Dsonar.organization=magnasilvar
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
