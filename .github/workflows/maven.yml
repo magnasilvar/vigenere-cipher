@@ -29,7 +29,7 @@ jobs:
           ${{ runner.os }}-maven-
     - name: Build with Maven + SonarSource
       run: mvn -B package --file pom.xml sonar:sonar
-        -Dsonar.java.libraries=~/.m2/repository/**/*.jar
+        -Dsonar.java.libraries=$HOME/.m2/repository/**/*.jar
         -Dsonar.host.url=https://sonarcloud.io
         -Dsonar.projectKey=magnasilvar_vigenere-cipher
         -Dsonar.organization=magnasilvar
