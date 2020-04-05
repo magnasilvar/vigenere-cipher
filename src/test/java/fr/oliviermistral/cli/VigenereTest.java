@@ -1,4 +1,4 @@
-package fr.oliviermistral;
+package fr.oliviermistral.cli;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,9 +6,13 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import fr.oliviermistral.business.CipherDirection;
+
+@Disabled
 public class VigenereTest {
 
     @TempDir
@@ -21,7 +25,7 @@ public class VigenereTest {
             output.createNewFile();
             try (final PrintStream newOut = new PrintStream(output); Scanner fileReader = new Scanner(output)) {
                 System.setOut(newOut);
-                Vigenere.main(new String[0]);
+                VigenereCommand.main(new String[0]);
                 Assertions.assertEquals(
                         "Bad use ! Syntax : \"encrypt|decrypt\" \"Text to encrypt / decrypt\" \"key\" \"(optional) alphabet\"",
                         fileReader.nextLine());
@@ -38,7 +42,7 @@ public class VigenereTest {
             output.createNewFile();
             try (final PrintStream newOut = new PrintStream(output); Scanner fileReader = new Scanner(output)) {
                 System.setOut(newOut);
-                Vigenere.main(new String[] { CipherDirection.DECRYPT.getDirection(), "Icatwhe ms dlc Hgvvvème vmzlcd !",
+                VigenereCommand.main(new String[] { CipherDirection.DECRYPT.getDirection(), "Icatwhe ms dlc Hgvvvème vmzlcd !",
                         "MyPrivateKey" });
                 Assertions.assertEquals("key=MYPRIVATEKEY", fileReader.nextLine());
                 Assertions.assertEquals("alphabet=ABCDEFGHIJKLMNOPQRSTUVWXYZ", fileReader.nextLine());
@@ -56,7 +60,7 @@ public class VigenereTest {
             output.createNewFile();
             try (final PrintStream newOut = new PrintStream(output); Scanner fileReader = new Scanner(output)) {
                 System.setOut(newOut);
-                Vigenere.main(new String[] { CipherDirection.DECRYPT.getDirection(), "Wdjtopp lo tdi Hpednèly vyjham !",
+                VigenereCommand.main(new String[] { CipherDirection.DECRYPT.getDirection(), "Wdjtopp lo tdi Hpednèly vyjham !",
                         "MyPrivateKey", "AbCdEfGhIjKlprtvym" });
                 Assertions.assertEquals("key=MYPRIVATEKEY", fileReader.nextLine());
                 Assertions.assertEquals("alphabet=ABCDEFGHIJKLPRTVYM", fileReader.nextLine());
@@ -74,7 +78,7 @@ public class VigenereTest {
             output.createNewFile();
             try (final PrintStream newErr = new PrintStream(output); Scanner fileReader = new Scanner(output)) {
                 System.setErr(newErr);
-                Vigenere.main(new String[] { "unknown", "", "MyPrivateKey", "Abcdac" });
+                VigenereCommand.main(new String[] { "unknown", "", "MyPrivateKey", "Abcdac" });
                 Assertions.assertEquals("Errors:", fileReader.nextLine());
                 Assertions.assertEquals("- Invalid argument 'unknown', valid arguments are: [encrypt, decrypt]",
                         fileReader.nextLine());
@@ -83,7 +87,7 @@ public class VigenereTest {
                         "- Key contains forbidden characters (not included in the alphabet): [P, R, T, E, V, Y, I, K, M]",
                         fileReader.nextLine());
                 Assertions.assertFalse(fileReader.hasNext());
-                System.setOut(originalErr);
+                System.setErr(originalErr);
             }
         }
     }

@@ -1,4 +1,4 @@
-package fr.oliviermistral;
+package fr.oliviermistral.business;
 
 public enum CipherDirection {
 

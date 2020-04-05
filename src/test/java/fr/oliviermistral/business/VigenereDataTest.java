@@ -1,4 +1,4 @@
-package fr.oliviermistral;
+package fr.oliviermistral.business;
 
 import java.util.Iterator;
 
@@ -9,57 +9,55 @@ public class VigenereDataTest {
 
     @Test
     public void testVigenereDataEncrypt() throws VigenereSettingsException {
-        final VigenereData data = new VigenereData(CipherDirection.ENCRYPT.getDirection(), null, "KEY", null);
+        final VigenereData data = new VigenereData(CipherDirection.ENCRYPT, null, "KEY", null);
         Assertions.assertEquals(CipherDirection.ENCRYPT, data.getCipherDirection());
     }
 
     @Test
     public void testVigenereDataDecrypt() throws VigenereSettingsException {
-        final VigenereData data = new VigenereData(CipherDirection.DECRYPT.getDirection(), null, "KEY", null);
+        final VigenereData data = new VigenereData(CipherDirection.DECRYPT, null, "KEY", null);
         Assertions.assertEquals(CipherDirection.DECRYPT, data.getCipherDirection());
     }
 
     @Test
-    public void testVigenereDataWithUnknownDirection() throws VigenereSettingsException {
+    public void testVigenereDataWithoutDirection() throws VigenereSettingsException {
         final VigenereSettingsException exception = Assertions.assertThrows(VigenereSettingsException.class,
-                () -> new VigenereData("Unknown", null, "a", null));
+                () -> new VigenereData(null, null, "a", null));
         final Iterator<String> errors = exception.getMessage().lines().iterator();
         Assertions.assertEquals("Error:", errors.next());
-        Assertions.assertEquals("- Invalid argument 'Unknown', valid arguments are: [encrypt, decrypt]", errors.next());
+        Assertions.assertEquals("- Cipher direction [encrypt|decrypt] is mandatory", errors.next());
     }
 
     @Test
     public void testVigenereDataWithDefaultAlphabet() throws VigenereSettingsException {
-        final VigenereData data = new VigenereData(CipherDirection.ENCRYPT.getDirection(), null, "KEY", null);
+        final VigenereData data = new VigenereData(CipherDirection.ENCRYPT, null, "KEY", null);
         Assertions.assertEquals(VigenereData.DEFAULT_ALPHABET, data.getAlphabet());
         Assertions.assertEquals(26, data.getAlphabetLength());
     }
 
     @Test
     public void testVigenereDataWithCustomAlphabet() throws VigenereSettingsException {
-        final VigenereData data = new VigenereData(CipherDirection.ENCRYPT.getDirection(), "ABCZ", "CZ",
-                "ENCRYPTED".toCharArray());
+        final VigenereData data = new VigenereData(CipherDirection.ENCRYPT, "ABCZ", "CZ", "ENCRYPTED".toCharArray());
         Assertions.assertEquals("ABCZ", data.getAlphabet());
         Assertions.assertEquals(4, data.getAlphabetLength());
     }
 
     @Test
     public void testVigenereDataKey() throws VigenereSettingsException {
-        final VigenereData data = new VigenereData(CipherDirection.ENCRYPT.getDirection(), null, "KEY", null);
+        final VigenereData data = new VigenereData(CipherDirection.ENCRYPT, null, "KEY", null);
         Assertions.assertEquals("KEY", data.getKey());
         Assertions.assertEquals(3, data.getKeyLength());
     }
 
     @Test
     public void testVigenereDataText() throws VigenereSettingsException {
-        final VigenereData data = new VigenereData(CipherDirection.ENCRYPT.getDirection(), null, "KEY",
-                "ENCRYPTED".toCharArray());
+        final VigenereData data = new VigenereData(CipherDirection.ENCRYPT, null, "KEY", "ENCRYPTED".toCharArray());
         Assertions.assertArrayEquals("ENCRYPTED".toCharArray(), data.getChars());
     }
 
     @Test
     public void testVigenereDataWithLowercase() throws VigenereSettingsException {
-        final VigenereData data = new VigenereData(CipherDirection.ENCRYPT.getDirection(), "abcdeÉL", "clé", null);
+        final VigenereData data = new VigenereData(CipherDirection.ENCRYPT, "abcdeÉL", "clé", null);
         Assertions.assertEquals("ABCDEÉL", data.getAlphabet());
         Assertions.assertEquals("CLÉ", data.getKey());
     }
@@ -67,7 +65,7 @@ public class VigenereDataTest {
     @Test
     public void testVigenereDataThrowsNonUniqueAlphabetCharsException() throws VigenereSettingsException {
         final VigenereSettingsException exception = Assertions.assertThrows(VigenereSettingsException.class,
-                () -> new VigenereData(CipherDirection.ENCRYPT.getDirection(), "Abcdeac", "a", null));
+                () -> new VigenereData(CipherDirection.ENCRYPT, "Abcdeac", "a", null));
         final Iterator<String> errors = exception.getMessage().lines().iterator();
         Assertions.assertEquals("Error:", errors.next());
         Assertions.assertEquals("- Alphabet contains non unique characters: [A, C]", errors.next());
@@ -76,7 +74,7 @@ public class VigenereDataTest {
     @Test
     public void testVigenereDataThrowsKeyForbiddenCharsException() throws VigenereSettingsException {
         final VigenereSettingsException exception = Assertions.assertThrows(VigenereSettingsException.class,
-                () -> new VigenereData(CipherDirection.ENCRYPT.getDirection(), "Abcde", "MyPrivateKey", null));
+                () -> new VigenereData(CipherDirection.ENCRYPT, "Abcde", "MyPrivateKey", null));
         final Iterator<String> errors = exception.getMessage().lines().iterator();
         Assertions.assertEquals("Error:", errors.next());
         Assertions.assertEquals(
@@ -90,7 +88,7 @@ public class VigenereDataTest {
                 () -> new VigenereData(null, "Abcdeac", "MyPrivateKey", null));
         final Iterator<String> errors = exception.getMessage().lines().iterator();
         Assertions.assertEquals("Errors:", errors.next());
-        Assertions.assertEquals("- Invalid argument 'null', valid arguments are: [encrypt, decrypt]", errors.next());
+        Assertions.assertEquals("- Cipher direction [encrypt|decrypt] is mandatory", errors.next());
         Assertions.assertEquals("- Alphabet contains non unique characters: [A, C]", errors.next());
         Assertions.assertEquals(
                 "- Key contains forbidden characters (not included in the alphabet): [P, R, T, V, Y, I, K, M]",

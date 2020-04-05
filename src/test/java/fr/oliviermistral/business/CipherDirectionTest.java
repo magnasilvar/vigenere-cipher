@@ -1,4 +1,4 @@
-package fr.oliviermistral;
+package fr.oliviermistral.business;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
