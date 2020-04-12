@@ -18,12 +18,13 @@ public class VigenereCommand implements Runnable {
     @Spec
     private CommandSpec spec;
 
+    @Override
     public void run() {
         throw new CommandLine.ParameterException(spec.commandLine(), "Missing required command");
     }
 
     public static void main(final String[] args) {
-        System.exit(new CommandLine(new VigenereCommand()).execute(args));
+        new CommandLine(new VigenereCommand()).execute(args);
     }
 
 }
