@@ -1,6 +1,7 @@
 package fr.oliviermistral.cli;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.Enumeration;
 import java.util.jar.Attributes;
@@ -16,8 +17,8 @@ public final class ManifestVersionProvider  implements IVersionProvider {
         final Enumeration<URL> resources = CommandLine.class.getClassLoader().getResources("META-INF/MANIFEST.MF");
         while (resources.hasMoreElements()) {
             final URL url = resources.nextElement();
-            try {
-                final Attributes attributes = new Manifest(url.openStream()).getMainAttributes();
+            try (final InputStream urlStream = url.openStream()) {
+                final Attributes attributes = new Manifest(urlStream).getMainAttributes();
                 if (isApplicableManifest(attributes)) {
                     return new String[] { attributes.getValue("Implementation-Version") };
                 }

@@ -19,7 +19,7 @@ public class EncryptCommand implements Runnable {
 
     @Override
     public void run() {
-        System.out.println(reusableOptions.cipherAction(CipherDirection.ENCRYPT));
+        reusableOptions.cipherAction(CipherDirection.ENCRYPT);
     }
 
 }

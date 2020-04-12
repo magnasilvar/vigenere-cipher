@@ -19,7 +19,7 @@ public class DecryptCommand implements Runnable {
 
     @Override
     public void run() {
-        System.out.println(reusableOptions.cipherAction(CipherDirection.DECRYPT));
+        reusableOptions.cipherAction(CipherDirection.DECRYPT);
     }
 
 }

@@ -25,10 +25,10 @@ public class ReusableOptions {
     @Parameters(description = "Sequence to process")
     private String sequence;
 
-    public String cipherAction(final CipherDirection cipherDirection) {
+    public void cipherAction(final CipherDirection cipherDirection) {
         try {
             final VigenereData data = new VigenereData(cipherDirection, alphabet, key, sequence.toCharArray());
-            return VigenereUtils.cipher(data);
+            spec.commandLine().getOut().println(VigenereUtils.cipher(data));
         } catch (final VigenereSettingsException e) {
             throw new CommandLine.ParameterException(spec.commandLine(), e.getMessage(), e);
         }
