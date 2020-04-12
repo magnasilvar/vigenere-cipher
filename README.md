@@ -13,7 +13,7 @@ B|C|C                  For the others, don't say we didn't warn you! ¯\_(ツ)_/
 [![Known Vulnerabilities](https://snyk.io/test/github/magnasilvar/vigenere-cipher/badge.svg?targetFile=pom.xml)](https://snyk.io/test/github/magnasilvar/vigenere-cipher?targetFile=pom.xml)
 [![Follow @oliviermistral](https://img.shields.io/twitter/follow/oliviermistral.svg?style=social)](https://twitter.com/intent/follow?screen_name=oliviermistral)
 
-# vigenere-cipher - a Java implementation with a convenient **CLI** !
+# vigenere-cipher - a Java implementation with a convenient **CLI**
 
 ## How to build the CLI
 
@@ -103,6 +103,6 @@ Hello !
 
 ### Version
 ```powershell
-PS C:\GIT\vigenere-cipher> vigenere -V
+PS C:\GIT\vigenere-cipher> vigenere --version
 2.0.0-SNAPSHOT
 ```
