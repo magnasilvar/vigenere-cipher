@@ -8,9 +8,11 @@ import org.junit.jupiter.api.Test;
 public class ManifestVersionProviderTest {
 
     @Test
-    public void testGetVersionWithoutConfig() throws IOException {
+    public void testGetVersion() throws IOException {
         final ManifestVersionProvider manifestVersionProvider = new ManifestVersionProvider();
-        Assertions.assertEquals(0, manifestVersionProvider.getVersion().length);
+        final String[] version = manifestVersionProvider.getVersion();
+        Assertions.assertEquals(1, version.length);
+        Assertions.assertEquals("x.y.z", version[0]);
     }
 
 }
