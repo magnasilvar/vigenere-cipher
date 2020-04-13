@@ -17,7 +17,7 @@ B|C|C                  For the others, don't say we didn't warn you! ¯\_(ツ)_/
 
 ## Vignère cipher
 
-A little bit of history (extract from [wikipedia](https://en.wikipedia.org/wiki/Vigenère_cipher)) : the **Vigenère cipher** is a method of encrypting alphabetic text by using a series of interwoven Caesar ciphers, based on the letters of a keyword. It employs a form of polyalphabetic substitution.
+A little bit of history (extract from [wikipedia](https://en.wikipedia.org/wiki/Vigenère_cipher)): the **Vigenère cipher** is a method of encrypting alphabetic text by using a series of interwoven Caesar ciphers, based on the letters of a keyword. It employs a form of polyalphabetic substitution.
 
 First described by **Giovan Battista Bellaso** in _1553_, the cipher is easy to understand and implement, but it resisted all attempts to break it until _1863_, three centuries later. This earned it the description le chiffre indéchiffrable (French for 'the indecipherable cipher'). Many people have tried to implement encryption schemes that are essentially Vigenère ciphers. In _1863_, **Friedrich Kasiski** was the first to publish a general method of deciphering Vigenère ciphers.
 
@@ -31,23 +31,23 @@ In the 19th century the scheme was misattributed to **Blaise de Vigenère** (_15
 Clone or download the _vigenere-cipher_ project.
 
 Package it with `maven`:
-```powershell
-PS C:\GIT\vigenere-cipher> mvn clean package -U
+```cmd
+mvn clean package -U
 ```
 
 [Picocli](https://github.com/remkop/picocli) is used to provide the CLI. Thanks to the `maven-shade-plugin`, this external dependency is included in the packaged JAR.
 
 You can directly run the compiled JAR with the `java -jar` command.
 
-Example :
-```powershell
-PS C:\GIT\vigenere-cipher> java -jar .\target\vigenere-cipher-2.0.0.jar encrypt --key=MyPrivateKey "Welcome to the Vigenère cipher !"
-Icatwhe ms dlc Hgvvvème vmzlcd !
+Example:
+```cmd
+java -jar target\vigenere-cipher-2.0.0.jar encrypt --key=MyPrivateKey "Welcome to the Vigenère cipher !"
 ```
+Will output: "`Icatwhe ms dlc Hgvvvème vmzlcd !`"
 
 ### GraalVM Native Image Toolchain
 
-**GraalVM** provides a great tool : "**Native Image**" which allows us to generate an executable for our CLI. A maven plugin (`native-image-maven-plugin`) exists but it's not really convenient on Windows.
+**GraalVM** provides a great tool: "**Native Image**" which allows us to generate an executable for our CLI. A maven plugin (`native-image-maven-plugin`) exists but it's not really convenient on Windows.
 
 This InfoQ article [Build Great Native CLI Apps in Java with Graalvm and Picocli](https://www.infoq.com/articles/java-native-cli-graalvm-picocli/) provides details on setting up the GraalVM toolchain for creating native images. It pays special attention to Windows, where setting up the compiler toolchain can be tricky.
 
@@ -57,16 +57,16 @@ This InfoQ article [Build Great Native CLI Apps in Java with Graalvm and Picocli
 2. Unzip the archive to your file system.
 3. Configure `PATH` environment variable. Setting environment variables via the command line will work the same way for Windows 7, 8 and 10.
     * Add the GraalVM **bin** folder to the `PATH` environment variable:
-      ```powershell
+      ```cmd
       setx /M PATH "C:\Progra~1\Java\graalvm-ce-java11-20.0.0\bin;%PATH%"
       ```
       Note that the `/M` flag, equivalent to `-m`, requires elevated user privileges.
     * Restart Command Prompt to reload the environment variables. Then use the following command to check whether the variable was set correctly:
-      ```powershell
+      ```cmd
       echo %PATH%
       ```
 4. To build native images using the Java 11 version of GraalVM (19.3.0 and greater), you can install the Visual C Build Tools Workload for Visual Studio 2017 Build Tools using [chocolatey](https://chocolatey.org/docs/installation):
-    ```powershell
+    ```cmd
     choco install visualstudio2017-workload-vctools
     ```
     After installation, set up the environment from the cmd prompt with this command:
@@ -77,8 +77,8 @@ This InfoQ article [Build Great Native CLI Apps in Java with Graalvm and Picocli
 
 #### Creating a Native Image
 
-```powershell
-native-image --static -jar .\target\vigenere-cipher-2.0.0.jar vigenere
+```cmd
+native-image -jar target\vigenere-cipher-2.0.0.jar vigenere
 ```
 
 Add `vigenere.exe` parent folder to `PATH` environment variable. That's all ! You can now use **Vigenère cipher CLI** everywhere you want on your computer !
@@ -93,37 +93,37 @@ This dll (from [Microsoft Visual C++ 2015 Redistributable Update 3 RC](https://w
 
 ### Encrypt
 
-#### With default alphabet
-```powershell
-PS C:\GIT\vigenere-cipher> vigenere encrypt --key=MyPrivateKey "Welcome to the Vigenère cipher !"
-Icatwhe ms dlc Hgvvvème vmzlcd !
+#### Default alphabet
+```cmd
+vigenere encrypt --key=MyPrivateKey "Welcome to the Vigenère cipher !"
 ```
+Will output: "`Icatwhe ms dlc Hgvvvème vmzlcd !`"
 
-#### With custom alphabet
-```powershell
-PS C:\GIT\vigenere-cipher> vigenere encrypt "Hello !" --key=key --alphabet=ehkloy
-Lekyo !
+#### Custom alphabet
+```cmd
+vigenere encrypt "Hello !" --key=key --alphabet=ehkloy
 ```
+Will output: "`Lekyo !`"
 
 ### Decrypt
 
-#### With default alphabet
-```powershell
-PS C:\GIT\vigenere-cipher> vigenere decrypt --key=MyPrivateKey "Icatwhe ms dlc Hgvvvème vmzlcd !"
-Welcome to the Vigenère cipher !
+#### Default alphabet
+```cmd
+vigenere decrypt --key=MyPrivateKey "Icatwhe ms dlc Hgvvvème vmzlcd !"
 ```
+Will output: "`Welcome to the Vigenère cipher !`"
 
-#### With custom alphabet
-```powershell
-PS C:\GIT\vigenere-cipher> vigenere decrypt "Lekyo !" --key=key --alphabet=ehkloy
-Hello !
+#### Custom alphabet
+```cmd
+vigenere decrypt "Lekyo !" --key=key --alphabet=ehkloy
 ```
+Will output: "`Hello !`"
 
 ### Version
-```powershell
-PS C:\GIT\vigenere-cipher> vigenere --version
-2.0.0
+```cmd
+vigenere --version
 ```
+Will output: "`2.0.0`"
 
 ### Using Aliases
 
