@@ -15,6 +15,14 @@ B|C|C                  For the others, don't say we didn't warn you! ¯\_(ツ)_/
 
 # vigenere-cipher - a Java implementation with a convenient **CLI**
 
+## Vignère cipher
+
+A little bit of history (extract from [wikipedia](https://en.wikipedia.org/wiki/Vigenère_cipher)) : the **Vigenère cipher** is a method of encrypting alphabetic text by using a series of interwoven Caesar ciphers, based on the letters of a keyword. It employs a form of polyalphabetic substitution.
+
+First described by **Giovan Battista Bellaso** in _1553_, the cipher is easy to understand and implement, but it resisted all attempts to break it until _1863_, three centuries later. This earned it the description le chiffre indéchiffrable (French for 'the indecipherable cipher'). Many people have tried to implement encryption schemes that are essentially Vigenère ciphers. In _1863_, **Friedrich Kasiski** was the first to publish a general method of deciphering Vigenère ciphers.
+
+In the 19th century the scheme was misattributed to **Blaise de Vigenère** (_1523–1596_), and so acquired its present name.
+
 ## How to build the CLI
 
 > You need at least `JDK 11` ([OpenJDK](https://openjdk.java.net/) is recommended).
@@ -75,27 +83,37 @@ native-image --static -jar .\target\vigenere-cipher-2.0.0-SNAPSHOT.jar vigenere
 
 Add `vigenere.exe` parent folder to `PATH` environment variable. That's all ! You can now use **Vigenère cipher CLI** everywhere you want on your computer !
 
+#### Running Native Images on different Windows
+
+The native binary we just created works fine on the machine where we just built it, but when you run it on a different Windows machine, you may have an error which reports that the `VCRUNTIME140.dll` is missing.
+
+This dll (from [Microsoft Visual C++ 2015 Redistributable Update 3 RC](https://www.microsoft.com/en-us/download/details.aspx?id=52685)) can be placed in the same directory as the exe, or in `C:\Windows\System32`.
+
 ## CLI Usage
 
-### Encrypt (with default alphabet)
+### Encrypt
+
+#### With default alphabet
 ```powershell
 PS C:\GIT\vigenere-cipher> vigenere encrypt --key=MyPrivateKey "Welcome to the Vigenère cipher !"
 Icatwhe ms dlc Hgvvvème vmzlcd !
 ```
 
-### Decrypt (with default alphabet)
-```powershell
-PS C:\GIT\vigenere-cipher> vigenere decrypt --key=MyPrivateKey "Icatwhe ms dlc Hgvvvème vmzlcd !"
-Welcome to the Vigenère cipher !
-```
-
-### Encrypt (with custom alphabet)
+#### With custom alphabet
 ```powershell
 PS C:\GIT\vigenere-cipher> vigenere encrypt "Hello !" --key=key --alphabet=ehkloy
 Lekyo !
 ```
 
-### Decrypt (with custom alphabet)
+### Decrypt
+
+#### With default alphabet
+```powershell
+PS C:\GIT\vigenere-cipher> vigenere decrypt --key=MyPrivateKey "Icatwhe ms dlc Hgvvvème vmzlcd !"
+Welcome to the Vigenère cipher !
+```
+
+#### With custom alphabet
 ```powershell
 PS C:\GIT\vigenere-cipher> vigenere decrypt "Lekyo !" --key=key --alphabet=ehkloy
 Hello !
@@ -106,3 +124,17 @@ Hello !
 PS C:\GIT\vigenere-cipher> vigenere --version
 2.0.0-SNAPSHOT
 ```
+
+### Using Aliases
+
+#### Command Options
+* `-h` is the `--help` option alias.
+* `-V` is the `--version` option alias.
+
+#### Subcommands
+* `ec` is the `encrypt` subcommand alias.
+* `dc` is the `decrypt` subcommand alias.
+
+#### Subcommand Options
+* `-k` is the `--key` subcommand option alias.
+* `-a` is the `--alphabet` subcommand option alias.
