@@ -10,7 +10,7 @@ import java.util.jar.Manifest;
 import picocli.CommandLine;
 import picocli.CommandLine.IVersionProvider;
 
-public final class ManifestVersionProvider  implements IVersionProvider {
+public final class ManifestVersionProvider implements IVersionProvider {
 
     @Override
     public String[] getVersion() throws IOException {
