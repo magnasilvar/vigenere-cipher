@@ -1,4 +1,4 @@
-package fr.oliviermistral;
+package fr.oliviermistral.business;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,9 +18,9 @@ public class VigenereData {
     private final char[] chars;
     private final List<String> errors = new ArrayList<>();
 
-    public VigenereData(final String direction, final String alphabet, final String key, final char[] chars)
-            throws VigenereSettingsException {
-        this.cipherDirection = manageCipherDirection(direction);
+    public VigenereData(final CipherDirection cipherDirection, final String alphabet, final String key,
+            final char[] chars) throws VigenereSettingsException {
+        this.cipherDirection = manageCipherDirection(cipherDirection);
         this.alphabet = manageAlphabet(alphabet);
         this.alphabetLength = this.alphabet.length();
         this.key = manageKey(key);
@@ -56,12 +56,10 @@ public class VigenereData {
         return chars;
     }
 
-    private CipherDirection manageCipherDirection(final String value) {
-        final CipherDirection direction = CipherDirection.from(value);
+    private CipherDirection manageCipherDirection(final CipherDirection direction) {
         if (direction == null) {
-            errors.add(new StringBuilder().append("Invalid argument '").append(value)
-                    .append("', valid arguments are: [").append(CipherDirection.ENCRYPT.getDirection()).append(", ")
-                    .append(CipherDirection.DECRYPT.getDirection()).append("]").toString());
+            errors.add(new StringBuilder().append("Cipher direction [").append(CipherDirection.ENCRYPT.getDirection())
+                    .append("|").append(CipherDirection.DECRYPT.getDirection()).append("] is mandatory").toString());
         }
         return direction;
     }

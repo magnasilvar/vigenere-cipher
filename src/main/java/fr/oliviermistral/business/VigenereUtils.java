@@ -1,4 +1,4 @@
-package fr.oliviermistral;
+package fr.oliviermistral.business;
 
 import java.util.function.IntFunction;
 
@@ -13,10 +13,8 @@ public final class VigenereUtils {
         final IntFunction<IntFunction<IntFunction<Integer>>> findLetterPosition;
         if (data.getCipherDirection() == CipherDirection.ENCRYPT) {
             findLetterPosition = findEncryptedLetterPosition();
-            result.append("Cipher text: ");
         } else {
             findLetterPosition = findDecryptedLetterPosition();
-            result.append("Plain text: ");
         }
         return cipher(result, data, findLetterPosition);
     }
