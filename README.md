@@ -41,7 +41,7 @@ You can directly run the compiled JAR with the `java -jar` command.
 
 Example :
 ```powershell
-PS C:\GIT\vigenere-cipher> java -jar .\target\vigenere-cipher-2.0.0-SNAPSHOT.jar encrypt --key=MyPrivateKey "Welcome to the Vigenère cipher !"
+PS C:\GIT\vigenere-cipher> java -jar .\target\vigenere-cipher-2.0.0.jar encrypt --key=MyPrivateKey "Welcome to the Vigenère cipher !"
 Icatwhe ms dlc Hgvvvème vmzlcd !
 ```
 
@@ -78,7 +78,7 @@ This InfoQ article [Build Great Native CLI Apps in Java with Graalvm and Picocli
 #### Creating a Native Image
 
 ```powershell
-native-image --static -jar .\target\vigenere-cipher-2.0.0-SNAPSHOT.jar vigenere
+native-image --static -jar .\target\vigenere-cipher-2.0.0.jar vigenere
 ```
 
 Add `vigenere.exe` parent folder to `PATH` environment variable. That's all ! You can now use **Vigenère cipher CLI** everywhere you want on your computer !
@@ -122,7 +122,7 @@ Hello !
 ### Version
 ```powershell
 PS C:\GIT\vigenere-cipher> vigenere --version
-2.0.0-SNAPSHOT
+2.0.0
 ```
 
 ### Using Aliases
